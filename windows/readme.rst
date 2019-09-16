@@ -30,5 +30,5 @@ Then::
           > cd nbu\build
           > py -3.7 -m twine upload dist\*
           > cd ..\build_x64
-          > py -3.8 -m twine upload dist\*
+          > py -3.7 -m twine upload dist\*
 
