@@ -11,7 +11,7 @@ The process is semi-automated. It pulls the PRs and authors from the 'pulls' pag
    earliest date associated with the relevant PRs. This URL comes directly
    from the GitHub PR search interface if you search with::
   
-   is:pr is:merged created:>=2019-04-01
+   is:pr is:merged sort:updated-desc merged:>2019-08-31 
 
 2. Run the Python script to generate the list of PRs and authors (written to authors.txt)::
 

@@ -24,4 +24,11 @@ After installing whatever versions of Python you want, make sure they all have '
    ...
    > py -2.7-32 -m pip install -U pip wheel
 
+Then::
+
+          > runme_python.bat
+          > cd nbu\build
+          > py -3.7 -m twine upload dist\*
+          > cd ..\build_x64
+          > py -3.8 -m twine upload dist\*
 
