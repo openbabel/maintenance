@@ -15,7 +15,7 @@ Bump the version in the following locations (if necessary).
      bump the patch version to 99. An alternative (for the future perhaps)
      would be to append "dev" to the patch version.
 
-2. docs/Doxyfile.in - search for "PROJECT_NUMBER" - don't need to update
+2. doc/Doxyfile.in - search for "PROJECT_NUMBER" - don't need to update
    for patch releases
 
 These changes can be done via a PR and immediately merged.
