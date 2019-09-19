@@ -1,0 +1,126 @@
+name: openbabel
+base: core18 # Ubuntu 18.04
+version: "3.0.0a2"
+grade: "stable" # stable for release or rc, devel otherwise
+summary: Open Babel, the Open Source chemistry toolbox
+description: Open Babel is a chemical toolbox designed to speak the many languages of chemical data. It's an open, collaborative project allowing anyone to search, convert, analyze, or store data from molecular modeling, chemistry, solid-state materials, biochemistry, or related areas. 
+confinement: strict
+
+apps:
+  obabel:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obabel
+    plugs: [ home ]
+  obconformer:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obconformer
+    plugs: [ home ]
+  obdistgen:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obdistgen
+    plugs: [ home ]
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obenergy
+    plugs: [ home ]
+  obfit:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obfit
+    plugs: [ home ]
+  obgen:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obgen
+    plugs: [ home ]
+  obgrep:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obgrep
+    plugs: [ home ]
+  obgui:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION UBUNTU_MENUPROXY=0 desktop-launch obgui
+    plugs: [desktop,desktop-legacy,x11,unity7,wayland,home]
+  obminimize:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obminimize
+    plugs: [ home ]
+  obprobe:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obprobe
+    plugs: [ home ]
+  obprop:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obprop
+    plugs: [ home ]
+  obrms:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obrms
+    plugs: [ home ]
+  obrotamer:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obrotamer
+    plugs: [ home ]
+  obrotate:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obrotate
+    plugs: [ home ]
+  obspectrophore:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obspectrophore
+    plugs: [ home ]
+  obsym:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obsym
+    plugs: [ home ]
+  obtautomer:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obtautomer
+    plugs: [ home ]
+  obthermo:
+    command: env BABEL_LIBDIR=$SNAP/lib/openbabel/$SNAP_VERSION BABEL_DATADIR=$SNAP/share/openbabel/$SNAP_VERSION obthermo
+    plugs: [ home ]
+parts:
+  openbabel:
+    plugin: cmake
+    configflags: ["-DCMAKE_BUILD_TYPE=RELEASE"]
+    source: https://github.com/openbabel/openbabel/archive/openbabel-3-0-0a2.tar.gz
+    build-packages:
+      - libxml2-dev
+      - libcairo2-dev
+      - libeigen3-dev
+      - zlib1g-dev
+    stage-packages:
+      - libxml2
+      - libcairo2
+      - zlib1g
+        # the following are required by wxwidgets-sdk
+      - libgtk-3-0
+      - libnotify4
+      - libxxf86vm1
+      - libsm6
+    after: [wxwidgets-sdk, desktop-gtk3]
+
+  wxwidgets-sdk:
+  # The wxWidgets SDK Stage Snaps
+  # https://forum.snapcraft.io/t/the-wxwidgets-sdk-stage-snaps/10877
+    plugin: nil
+    stage-snaps:
+    - wxwidgets-sdk-gtk3
+    filesets:
+      crash-dialog-support:
+      - usr/bin/*addr2line
+      library-shared:
+      - '**/lib/**/*.so*'
+    prime:
+    - $crash-dialog-support
+    - $library-shared
+
+  desktop-gtk3:
+    build-packages:
+    - build-essential
+    - libgtk-3-dev
+    make-parameters:
+    - FLAVOR=gtk3
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    stage-packages:
+    - libxkbcommon0
+    - ttf-ubuntu-font-family
+    - dmz-cursor-theme
+    - light-themes
+    - adwaita-icon-theme
+    - gnome-themes-standard
+    - shared-mime-info
+    - libgtk-3-0
+    - libgdk-pixbuf2.0-0
+    - libglib2.0-bin
+    - libgtk-3-bin
+    - unity-gtk3-module
+    - libappindicator3-1
+    - locales-all
+    - xdg-user-dirs
+    - ibus-gtk3
+    - libibus-1.0-5
+    - fcitx-frontend-gtk3
