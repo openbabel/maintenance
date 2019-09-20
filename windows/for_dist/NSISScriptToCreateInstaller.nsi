@@ -456,7 +456,7 @@ FunctionEnd
 ;General
 
   ;OpenBabel version
-  !define OBVersion 3.0.0a1
+  !define OBVersion 3.0.0a2
 
 ; !define SourceDir C:\Tools\openbabel\openbabel
 !ifndef SourceDir
