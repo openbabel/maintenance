@@ -35,3 +35,45 @@ This cannot be done via a PR and must be done directly on the repo.
 
    git push origin openbabel-3-0-0a1
 
+Major version
+-------------
+
+On going from 2.x to 3.x, for example, you should make a few more changes:
+
+1. CMakeLists.txt::
+   
+   set(OB_INCLUDE_DIRS "include/openbabel-3.0") in CMakeLists.txt
+     and
+   set(OB_EXPORTS_FILE "${openbabel_BINARY_DIR}/OpenBabel3_EXPORTS.cmake")   
+
+2. The package config section::
+
+          configure_file(${openbabel_SOURCE_DIR}/openbabel-3.0.pc.cmake
+            ${openbabel_BINARY_DIR}/openbabel-3.0.pc @ONLY)
+          install(FILES ${openbabel_BINARY_DIR}/openbabel-3.0.pc
+            DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
+
+  and::
+
+          git mv openbabel-2.0.pc.cmake openbabel-3.0.pc.cmake
+
+3. dlhandler_win32.cpp::
+
+    handle = GetModuleHandle("openbabel-3.dll");//CMake/VC++2008 build will use this.
+
+4. src/CMakeLists.txt::
+
+  # Set the output name to openbabel-3 (preserves old behaviour). Is this desired?
+  set_target_properties(openbabel PROPERTIES
+    OUTPUT_NAME openbabel-3)
+  remove_definitions(_UNICODE UNICODE)
+   
+5. Then there's a whole bunch of lines in CMakeLists.txt starting with::
+
+     # Create the Config and ConfigVersion files in the build directory, useful to
+  
+   and the associated files::
+
+        git mv OpenBabel2Config.cmake.in OpenBabel3Config.cmake.in
+        git mv OpenBabel2ConfigVersion.cmake.in OpenBabel3ConfigVersion.cmake.in
+
