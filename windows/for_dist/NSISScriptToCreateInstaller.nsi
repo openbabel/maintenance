@@ -557,8 +557,8 @@ Section "Dummy Section" SecDummy
   ;Java and CSharp bindings
   File ${SourceDir}\scripts\java\openbabel.jar
   File ${BuildDir}\bin\Release\openbabel_java.dll
-  ;File ${BuildDir}\bin\Release\openbabel_csharp.dll
-  ;File ${BuildDir}\bin\Release\OBDotNet.dll
+  File ${BuildDir}\bin\Release\openbabel_csharp.dll
+  File ${BuildDir}\bin\Release\OBDotNet.dll
 
   File ${DepsDir}\libs-common\${Arch}\*.dll
   File ${DepsDir}\libs-vs12\${Arch}\*.dll
