@@ -20,7 +20,7 @@ def get_data(miter):
             yield normalise(title), pr, user
 
 def download():
-    url = "https://github.com/openbabel/openbabel/pulls?page=PLACEHOLDER&utf8=%E2%9C%93&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+merged%3A>2019-08-31+".replace("%", "%%").replace("PLACEHOLDER", "%d")
+    url = "https://github.com/openbabel/openbabel/pulls?page=PLACEHOLDER&utf8=%E2%9C%93&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+merged%3A>2019-09-08+".replace("%", "%%").replace("PLACEHOLDER", "%d")
 
     for i in range(9):
         with urllib.request.urlopen(url % (i+1,)) as response:

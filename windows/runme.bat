@@ -10,7 +10,7 @@ del nbu\msvc-deps\include\inttypes.h
 
 git clone https://github.com/openbabel/openbabel.git nbu\src
 cd nbu\src
-git checkout tags/openbabel-3-0-0a2
+git checkout tags/openbabel-3-0-0
 cd ..\..
 call mbuild.bat
 cd ..\..

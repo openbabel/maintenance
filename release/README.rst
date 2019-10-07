@@ -42,20 +42,20 @@ On going from 2.x to 3.x, for example, you should make a few more changes:
 
 1. CMakeLists.txt::
    
-   set(OB_INCLUDE_DIRS "include/openbabel-3.0") in CMakeLists.txt
+   set(OB_INCLUDE_DIRS "include/openbabel3") in CMakeLists.txt
      and
    set(OB_EXPORTS_FILE "${openbabel_BINARY_DIR}/OpenBabel3_EXPORTS.cmake")   
 
 2. The package config section::
 
-          configure_file(${openbabel_SOURCE_DIR}/openbabel-3.0.pc.cmake
-            ${openbabel_BINARY_DIR}/openbabel-3.0.pc @ONLY)
-          install(FILES ${openbabel_BINARY_DIR}/openbabel-3.0.pc
+          configure_file(${openbabel_SOURCE_DIR}/openbabel-3.pc.cmake
+            ${openbabel_BINARY_DIR}/openbabel-3.pc @ONLY)
+          install(FILES ${openbabel_BINARY_DIR}/openbabel-3.pc
             DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
 
   and::
 
-          git mv openbabel-2.0.pc.cmake openbabel-3.0.pc.cmake
+          git mv openbabel-2.pc.cmake openbabel-3.pc.cmake
 
 3. dlhandler_win32.cpp::
 
