@@ -456,7 +456,7 @@ FunctionEnd
 ;General
 
   ;OpenBabel version
-  !define OBVersion 3.0.0a1
+  !define OBVersion 3.0.0
 
 ; !define SourceDir C:\Tools\openbabel\openbabel
 !ifndef SourceDir
@@ -545,7 +545,7 @@ Section "Dummy Section" SecDummy
 
   File /r /x test_*.* ${BuildDir}\bin\Release\*.exe
   File /r ${BuildDir}\bin\Release\*.obf
-  File ${BuildDir}\bin\Release\openbabel-2.dll
+  File ${BuildDir}\bin\Release\openbabel-3.dll
 
   StrCmp ${Arch} "i386" 0 archIs64
     File vc_redist.x86.exe
@@ -557,8 +557,8 @@ Section "Dummy Section" SecDummy
   ;Java and CSharp bindings
   File ${SourceDir}\scripts\java\openbabel.jar
   File ${BuildDir}\bin\Release\openbabel_java.dll
-  ;File ${BuildDir}\bin\Release\openbabel_csharp.dll
-  ;File ${BuildDir}\bin\Release\OBDotNet.dll
+  File ${BuildDir}\bin\Release\openbabel_csharp.dll
+  File ${BuildDir}\bin\Release\OBDotNet.dll
 
   File ${DepsDir}\libs-common\${Arch}\*.dll
   File ${DepsDir}\libs-vs12\${Arch}\*.dll
@@ -597,7 +597,7 @@ Section "Dummy Section" SecDummy
   ;Files for user to build own C++ programs using precompiled OpenBabel
   ;Not working correctly
   ;SetOutPath "$DataBase\obbuild"
-  ;File ..\build\src\Release\openbabel-2.lib   
+  ;File ..\build\src\Release\openbabel-3.lib   
   ;File /r /x .svn obbuild\*.*
   ;SetOutPath "$DataBase\obbuild\openbabel"
   ;File /r /x .svn ..\..\include\openbabel\*.*
@@ -670,7 +670,7 @@ Section "Uninstall"
   ;May not be installed, but it doesn't matter.
   Delete "$INSTDIR\Sieve.exe"
   
-  Delete "$INSTDIR\openbabel-2.dll"
+  Delete "$INSTDIR\openbabel-3.dll"
   Delete "$INSTDIR\iconv.dll"
   Delete "$INSTDIR\libiconv.dll"
   Delete "$INSTDIR\libinchi.dll"
@@ -696,6 +696,8 @@ Section "Uninstall"
   Delete "$INSTDIR\libpixman-1-0.dll"
   Delete "$INSTDIR\vcredist_x64.exe"
   Delete "$INSTDIR\vcredist_x86.exe"
+  Delete "$INSTDIR\vcredist.x64.exe"
+  Delete "$INSTDIR\vcredist.x86.exe"
 
   Delete "$INSTDIR\Uninstall.exe"
 

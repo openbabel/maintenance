@@ -11,7 +11,7 @@ For VS2017, I originally tried using the prebuilt binaries from wxWidgets, but I
 
 So now I just build it myself. Using MSVC2017, I open and upgrade the vc12 solution file in the msw folder. There are two relevant targets, "Release DLL" and "Release", available in both Win32 and x64 configurations. Just "Release" is sufficient - these libs will then be statically linked.
 
-Note that you may need to update CMake if you use the most recent version of wxWidgets as FindWxWidgets() hardcodes the version numbers. 
+Note that you may need to update CMake if you use the most recent version of wxWidgets as FindWxWidgets() hardcodes the version numbers.
 
 Python
 ------
@@ -24,7 +24,7 @@ After installing whatever versions of Python you want, make sure they all have '
    ...
    > py -2.7-32 -m pip install -U pip wheel
 
-Then::
+Then update the version in setup-setuptools.py and...::
 
           > runme_python.bat
           > cd nbu\build
