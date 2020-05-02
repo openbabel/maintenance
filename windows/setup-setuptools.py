@@ -22,7 +22,7 @@ shutil.copyfile(os.path.join("bin", "Release", "_openbabel.pyd"),
 # shutil.copyfile(os.path.join(srcdir, "scripts", "python", "openbabel.py"), "openbabel.py")
 
 setup_args = {"name":'openbabel',
-        "version":'3.0.0',
+        "version":'3.0.1',
         "author":'The Open Babel development team',
         "author_email":'openbabel-discuss@lists.sourceforge.net',
         "url":'http://openbabel.org',

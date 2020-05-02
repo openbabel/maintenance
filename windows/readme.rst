@@ -31,4 +31,3 @@ Then update the version in setup-setuptools.py and...::
           > py -3.7 -m twine upload dist\*
           > cd ..\build_x64
           > py -3.7 -m twine upload dist\*
-
