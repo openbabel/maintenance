@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: latin-1
-import urllib.request
+from urllib.request import urlopen, Request
 import time
 import os
 
@@ -20,18 +20,21 @@ def get_data(miter):
             yield normalise(title), pr, user
 
 def download():
-    url = "https://github.com/openbabel/openbabel/pulls?page=PLACEHOLDER&utf8=%E2%9C%93&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+merged%3A>2019-09-08+".replace("%", "%%").replace("PLACEHOLDER", "%d")
+    url = "https://github.com/openbabel/openbabel/pulls?page={}&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+merged%3A%3E2019-10-05"
 
     for i in range(9):
-        with urllib.request.urlopen(url % (i+1,)) as response:
+        # with urllib.request.urlopen(url.format(i+1)) as response:
+        with urlopen(Request(url.format(i+1), headers={'User-Agent': 'Mozilla'})) as response:
             html = response.read()
         with open("pr_%d.txt" % i, "wb") as out:
             out.write(html)
 
-missing = {
+missing = { # note: voidpin just prefers not to use his name
            "philthiel": "Philipp Thiel", "fredrikw": "Fredrik Wallner",
            "baoilleach": "Noel O'Boyle", "mwojcikowski": "Maciej Wójcikowski",
            "eloyfelix": "Eloy Felix", "orex": "Kirill Okhotnikov",
+           "afonari": "Alexandr Fonari",
+           "khoran": "Kevin Horan",
           }
 
 def getName(username):
@@ -42,7 +45,7 @@ def getName(username):
     fname = os.path.join("authors", "%s.html" % username)
     if not os.path.isfile(fname):
         with open(fname, "wb") as out:
-            with urllib.request.urlopen('http://github.com/%s' % author) as response:
+            with urlopen('http://github.com/%s' % author) as response:
                 html = response.read()
                 out.write(html)
             time.sleep(1)
@@ -60,7 +63,10 @@ def getName(username):
 if __name__ == "__main__":
     # Delete all of the pr_*.txt files to force a re-download
     if not os.path.isfile("pr_0.txt"):
+        print("Downloading HTML pages")
         download()
+    else:
+        print("Reusing HTML pages")
 
     authors = set()
     lines = []
